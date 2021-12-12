@@ -1,8 +1,15 @@
-.App {
-  padding: 30px;
-  display: flex;
+.error {
+  border: red 1px solid;
 }
 
-.App > div {
-  margin-right: 50px;
+.errorMessage {
+  color: red;
+}
+
+.activeFilter {
+  background-color: chocolate;
+}
+
+.isDone {
+  opacity: 0.5;
 }
