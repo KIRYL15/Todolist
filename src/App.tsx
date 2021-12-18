@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Todolist, TasksType} from "./Todolist";
+import {TasksType, Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {Input} from "./Components/Input";
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TodolistType = {
@@ -8,8 +9,8 @@ export type TodolistType = {
     title: string
     filter: FilterType
 }
-type TasksStateType={
-    [key: string]:TasksType[]
+type TasksStateType = {
+    [key: string]: TasksType[]
 }
 export const App = () => {
 
@@ -41,10 +42,7 @@ export const App = () => {
         tasks[todolistId] = newTodolist.filter(f => f.id !== id)
         setTasks({...tasks})*/
     }// функция удаления таски при нажатии на кнопку Х
-
-
     function addTasks(todolistId: string, title: string) {
-
         let task = {id: v1(), title, isDone: true}
         setTasks({...tasks, [todolistId]: [task, ...tasks[todolistId]]})
     }
@@ -53,15 +51,21 @@ export const App = () => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(m => m.id === id ? {...m, isDone: value} : m)})
         // setTasks(tasks.map(m => m.id === id ? {...m, isDone: value} : m))
     }
-
-    // let [filter, setFilter] = useState<FilterType>('all')
-    /* */
+    function removeTodolist(todolistId: string) {
+        setTodolist(todolist.filter(f => f.id !== todolistId))
+    }
     function changeFilter(todolistId: string, value: FilterType) {
         setTodolist(todolist.map(m => m.id === todolistId ? {...m, filter: value} : m))
+    }
+    function addTodolist(newTitle: string) {
+        let newTodolist: TodolistType = {id: v1(), title: newTitle, filter: 'all'}
+        setTodolist([newTodolist, ...todolist])
+        setTasks({...tasks, [newTodolist.id]: []})
     }
 
     return (
         <div className='App'>
+            <Input addItem={addTodolist}/>
             {
                 todolist.map(m => {
                     //debugger
@@ -73,6 +77,7 @@ export const App = () => {
                         tasksForTodolist = tasks[m.id].filter(f => f.isDone)
                     }
                     return (
+
                         <Todolist
                             key={m.id} //обязательно, для внутрннего функционала
                             todolistId={m.id}
@@ -83,6 +88,8 @@ export const App = () => {
                             addTasks={addTasks}
                             changeStatus={changeStatus}
                             filter={m.filter}
+                            removeTodolist={removeTodolist}
+                            addTodolist={addTodolist}
                         />)
                 })}
         </div>
