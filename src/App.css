@@ -3,10 +3,10 @@
   display:flex;
 }
 
-/*.App > div {*/
-/*  margin-right: 50px;*/
-/*  display:inline-block;*/
-/*}*/
+.App > div {
+  margin-right: 50px;
+  display:inline-block;
+}
 
 .error {
   border: red 5px solid;

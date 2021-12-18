@@ -37,7 +37,6 @@ export const App = () => {
 
     function removeTasks(todolistId: string, id: string) {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== id)})
-
         /*let newTodolist = tasks[todolistId]
         tasks[todolistId] = newTodolist.filter(f => f.id !== id)
         setTasks({...tasks})*/
@@ -65,7 +64,7 @@ export const App = () => {
 
     return (
         <div className='App'>
-            <Input addItem={addTodolist}/>
+            <Input jopa={addTodolist} />
             {
                 todolist.map(m => {
                     //debugger
@@ -77,7 +76,6 @@ export const App = () => {
                         tasksForTodolist = tasks[m.id].filter(f => f.isDone)
                     }
                     return (
-
                         <Todolist
                             key={m.id} //обязательно, для внутрннего функционала
                             todolistId={m.id}
@@ -89,7 +87,6 @@ export const App = () => {
                             changeStatus={changeStatus}
                             filter={m.filter}
                             removeTodolist={removeTodolist}
-                            addTodolist={addTodolist}
                         />)
                 })}
         </div>

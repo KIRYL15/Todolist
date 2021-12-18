@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import '../App.css'
 
 export type InputType = {
-    addItem: (title: string) => void
+    jopa: (title: string) => void
 }
 
 export const Input = (props: InputType) => {
@@ -12,7 +12,6 @@ export const Input = (props: InputType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-
     const onPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setTextError(null)
         if (e.key === 'Enter') {
@@ -21,13 +20,15 @@ export const Input = (props: InputType) => {
     }
 
     const addItem = () => {
-        if (title.trim() !== '') {
-            props.addItem(title.trim())
+        let trimmedTitle=title.trim()
+        if (trimmedTitle) {
+            props.jopa(trimmedTitle)
             setTitle('')
         } else {
             setTextError('Введите данные!')
         }
     }
+
     return (
         <div>
             <input value={title}

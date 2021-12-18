@@ -18,7 +18,7 @@ export const EditItem = (props: EditIItemType) => {
 
     return (
         editMode
-            ? <span onDoubleClick={onDoubleClickHandler}>{props.title}</span>
+            ? <span onDoubleClick={onDoubleClickHandler}>{localTitle}</span>
             : <input onChange={onChangeHandler} autoFocus onBlur={onDoubleClickHandler} value={localTitle}/>
     );
 };
