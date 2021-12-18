@@ -3,14 +3,14 @@ import {FilterType} from "./App";
 type TodolistType = {
     title: string
     tasks: TasksType[]
-    removeTasks: (TaskId: string) => void
+    removeTasks: (todolistId:string, TaskId: string) => void
     changeFilter: (todolistId: string, value: FilterType) => void
-    addTasks: (title: string) => void
-    changeStatus: (id: string, value: boolean) => void
+    addTasks: (todolistId: string, title: string) => void
+    changeStatus: (todolistId: string, id: string, value: boolean) => void
     filter: FilterType
     todolistId: string
 }
-type TasksType = {
+export type TasksType = {
     id: string
     title: string
     isDone: boolean
@@ -20,7 +20,7 @@ export const Todolist = (props: TodolistType) => {
     let [textError, setTextError]=useState<string | null>(null)
     const addTasks = () => {
         if (title.trim() !== '') {
-            props.addTasks(title)
+            props.addTasks(props.todolistId, title.trim())
             setTile('')
         }else {
             setTextError('Введите данные!')
@@ -60,10 +60,10 @@ export const Todolist = (props: TodolistType) => {
                 <ul>
                     {props.tasks.map(ts => {
                             const onPressRemoveTasksHandler = () => {
-                                props.removeTasks(ts.id)
+                                props.removeTasks(props.todolistId, ts.id)
                             }
                             const onChangeTasksHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                                props.changeStatus(ts.id, e.currentTarget.checked)
+                                props.changeStatus(props.todolistId, ts.id, e.currentTarget.checked)
                             }
                             return <li key={ts.id} className={ts.isDone?'isDone':''}>
                                 <input type="checkbox"
