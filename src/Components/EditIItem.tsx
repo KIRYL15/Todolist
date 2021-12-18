@@ -1,25 +1,20 @@
 import React, {useState} from 'react';
-
 type EditIItemType = {
     title: string
 }
-
 export const EditItem = (props: EditIItemType) => {
-
     let [localTitle, setLocalTitle] = useState(props.title)
     let [editMode, setEditMode] = useState(true)
-    const onDoubleClickHandler = () => {
+    const onEditMode = () => {
         setEditMode(!editMode)
     }
-
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLocalTitle(e.currentTarget.value)
     }
-
     return (
         editMode
-            ? <span onDoubleClick={onDoubleClickHandler}>{localTitle}</span>
-            : <input onChange={onChangeHandler} autoFocus onBlur={onDoubleClickHandler} value={localTitle}/>
+            ? <span onDoubleClick={onEditMode}>{localTitle}</span>
+            : <input onChange={changeTitle} onBlur={onEditMode} value={localTitle} autoFocus/>
     );
 };
 

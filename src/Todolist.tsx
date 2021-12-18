@@ -34,22 +34,17 @@ export const Todolist = (props: TodolistType) => {
     const addTodolistTasks = (title: string) => {
         props.addTasks(props.todolistId, title)
     }
-    const onClickRemoveTodolist = () => {
-        props.removeTodolist(props.todolistId)
-    }
+    const onClickRemoveTodolist = () => {props.removeTodolist(props.todolistId)}
     return (
         <div>
             <h3><EditItem title={props.title}/><button onClick={onClickRemoveTodolist}>X</button>
             </h3>
-
             <div><Input jopa={addTodolistTasks}/></div>
             <div>
                 <ul>
                     {props.tasks.map(ts => {
-
                         const onPressRemoveTasksHandler = () => props.removeTasks(props.todolistId, ts.id)
                         const onChangeTasksHandler = (e: ChangeEvent<HTMLInputElement>) => props.changeStatus(props.todolistId, ts.id, e.currentTarget.checked)
-
                         return <li key={ts.id}
                                    className={ts.isDone ? 'isDone' : ''}>
                             <input type="checkbox"

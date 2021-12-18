@@ -20,9 +20,9 @@ export const Input = (props: InputType) => {
     }
 
     const addItem = () => {
-        let trimmedTitle=title.trim()
-        if (trimmedTitle) {
-            props.jopa(trimmedTitle)
+       // let trimmedTitle=title.trim()
+        if (title.trim()) {
+            props.jopa(title.trim())
             setTitle('')
         } else {
             setTextError('Введите данные!')
